@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace Itzalizak
 {
-    public partial class Form1 : Form
+    public partial class frmItzalizak1 : Form
     {
-        protected double segunduak;
+        private double segunduak;
         protected DateTime itzaliordua;
 
-        public Form1()
+        public frmItzalizak1()
         {
             InitializeComponent();
         }
@@ -49,12 +49,13 @@ namespace Itzalizak
 
             TimeSpan segunduTotalak = itzaliordua - orain;
             segunduak = segunduTotalak.Seconds;
-            MessageBox.Show(segunduTotalak.Seconds.ToString());
+            
             lblInfo.Text = itzaliordua.ToString();
         }
 
         private void cmdOnartu_Click(object sender, EventArgs e)
         {
+            burutuAgindua();
             string flag;
             if (optItzali.Checked )
             {
@@ -68,11 +69,60 @@ namespace Itzalizak
             {
                 flag = "/l";
             }
+                        
+            DateTime orain = DateTime.Now;
 
-            string arg = flag + " /f /t " + segunduak.ToString();
-            MessageBox.Show(arg);
+            TimeSpan segunduTotalak = itzaliordua - orain;
+
+            string arg = flag + " /f /t " + segunduTotalak.Seconds.ToString();
             System.Diagnostics.Process.Start("shutdown", arg);
-            //System.Diagnostics.Process.Start("shutdown", "/s /f /t 0");
+            
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                mynotifyicon.Visible = true;
+                mynotifyicon.ShowBalloonTip(500);
+                
+                mynotifyicon.BalloonTipText = "My application still working...";
+                mynotifyicon.BalloonTipTitle = "My Sample Application";
+                mynotifyicon.BalloonTipIcon = ToolTipIcon.Info;
+                this.Hide();
+            }
+            else if (FormWindowState.Normal == this.WindowState)
+            {
+                mynotifyicon.Visible = false;
+            }
+        }
+
+        private void chkAukerak_CheckedChanged(object sender, EventArgs e)
+        {
+            if ( chkAukerak.Checked )
+            {
+                frmItzalizak1.ActiveForm.Height = 480;
+            }
+            else
+            {
+                frmItzalizak1.ActiveForm.Height = 230;
+            }
+        }
+
+        private void frmItzalizak1_Load(object sender, EventArgs e)
+        {
+            bool SetchkAukerak = Properties.Settings.Default.chkAukerak;
+            if (SetchkAukerak)
+            {
+                chkAukerak.Checked = true;
+            }
+        }
+
+        private void frmItzalizak1_Closing(object sender, EventArgs e)
+        {
+            bool SetchkAukerak = chkAukerak.Checked;
+            Properties.Settings.Default.chkAukerak = SetchkAukerak;
+            Properties.Settings.Default.Save();
         }
     }
 }
