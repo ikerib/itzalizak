@@ -34,5 +34,17 @@ namespace Itzalizak.Properties {
                 this["chkAukerak"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string prueba {
+            get {
+                return ((string)(this["prueba"]));
+            }
+            set {
+                this["prueba"] = value;
+            }
+        }
     }
 }

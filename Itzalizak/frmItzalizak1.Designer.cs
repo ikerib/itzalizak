@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmItzalizak1));
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.lblText1 = new System.Windows.Forms.Label();
@@ -43,7 +44,7 @@
             this.cmdEzeztatu = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.chkAukerak = new System.Windows.Forms.CheckBox();
-            this.mynotifyicon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox1.SuspendLayout();
             this.optWindows.SuspendLayout();
             this.SuspendLayout();
@@ -193,15 +194,19 @@
             this.chkAukerak.UseVisualStyleBackColor = true;
             this.chkAukerak.CheckedChanged += new System.EventHandler(this.chkAukerak_CheckedChanged);
             // 
-            // mynotifyicon
+            // notifyIcon1
             // 
-            this.mynotifyicon.Text = "notifyIcon1";
-            this.mynotifyicon.Visible = true;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // frmItzalizak1
             // 
+            this.AcceptButton = this.cmdOnartu;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cmdEzeztatu;
             this.ClientSize = new System.Drawing.Size(654, 442);
             this.Controls.Add(this.chkAukerak);
             this.Controls.Add(this.lblInfo);
@@ -209,9 +214,14 @@
             this.Controls.Add(this.cmdOnartu);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblText1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmItzalizak1";
             this.Text = "itzalizak!";
             this.Load += new System.EventHandler(this.frmItzalizak1_Load);
+            this.Shown += new System.EventHandler(this.frmItzalizak1_Shown);
+            this.Resize += new System.EventHandler(this.frmItzalizak1_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.optWindows.ResumeLayout(false);
@@ -237,7 +247,7 @@
         private System.Windows.Forms.Button cmdEzeztatu;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.CheckBox chkAukerak;
-        private System.Windows.Forms.NotifyIcon mynotifyicon;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
