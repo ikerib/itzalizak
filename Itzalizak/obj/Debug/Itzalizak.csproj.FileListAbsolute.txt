@@ -6,3 +6,4 @@ c:\users\ikerib\documents\visual studio 2013\Projects\Itzalizak\Itzalizak\obj\De
 c:\users\ikerib\documents\visual studio 2013\Projects\Itzalizak\Itzalizak\obj\Debug\Itzalizak.pdb
 C:\Users\ikerib\Documents\Visual Studio 2013\Projects\Itzalizak\Itzalizak\obj\Debug\Itzalizak.frmItzalizak1.resources
 C:\Users\ikerib\Documents\Visual Studio 2013\Projects\Itzalizak\Itzalizak\bin\Debug\Itzalizak.exe.config
+C:\Users\ikerib\documents\visual studio 2013\Projects\Itzalizak\Itzalizak\obj\Debug\Itzalizak.csprojResolveAssemblyReference.cache

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Itzalizak
 {
@@ -22,7 +23,12 @@ namespace Itzalizak
 
         private void cmdEzeztatu_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("shutdown", "/a");
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "shutdown";
+            startInfo.Arguments = "/a";
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            Process.Start(startInfo);
+
             lblInfo.Text = "";
         }
 
@@ -76,15 +82,26 @@ namespace Itzalizak
 
             TimeSpan segunduTotalak = itzaliordua - orain;
 
-            string strSeconds = Math.Round(segunduTotalak.TotalSeconds).ToString();
+            if (Math.Round(segunduTotalak.TotalSeconds) > 0)
+            {
+                string strSeconds = Math.Round(segunduTotalak.TotalSeconds).ToString();
+                string arg = flag + " /f /t " + strSeconds;
 
-            string arg = flag + " /f /t " + strSeconds;
-            
-            System.Diagnostics.Process.Start("shutdown", arg);
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "shutdown";
+                startInfo.Arguments = arg;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                Process.Start(startInfo);
 
-            notifyIcon1.BalloonTipText = itzaliordua.ToString();
-            notifyIcon1.BalloonTipTitle = "Itzalizak!";
-            this.WindowState = FormWindowState.Minimized;
+                notifyIcon1.BalloonTipText = itzaliordua.ToString();
+                notifyIcon1.BalloonTipTitle = "Itzalizak!";
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                MessageBox.Show("Shutdown time must be in the future!");
+                return;
+            }
         }
 
         private void chkAukerak_CheckedChanged(object sender, EventArgs e)
